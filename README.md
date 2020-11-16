@@ -21,7 +21,7 @@ After installation, create a ```.env``` file in the root of your project and add
 
 **.env** file
 ```
-REACT_APP_IPIFY_API_KEY=
+REACT_APP_IPIFY_API_KEY=YOUR_API_KEY_HERE
 ```
 
 ## Screenshots ##
