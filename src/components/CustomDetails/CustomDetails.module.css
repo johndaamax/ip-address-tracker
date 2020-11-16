@@ -1,0 +1,45 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem;
+    width: 25%;
+    align-items: flex-start;
+}
+
+h3, h6{
+    margin: 0;
+}
+
+h3 {
+    word-wrap: break-word;
+}
+
+h6 {
+    font-weight: 400;
+    color: grey;
+    text-transform: uppercase;
+    letter-spacing: 0.3mm;
+    margin-bottom: 0.4rem;
+}
+
+
+@media screen and (max-width: 446px) {
+    /* .wrapper {
+      margin-bottom: 1rem;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    } */
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+      margin-bottom: 1rem;
+      padding: 0 0.5rem;
+      min-width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+}

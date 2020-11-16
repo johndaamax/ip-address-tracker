@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.ipInput {
+    padding: 1rem 0.5rem;
+    font-size: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+}
+
+.ipInput:focus {
+    outline: none;
+}
+
+.btnSubmit {
+    background: black;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.btnSubmit:focus {
+    outline: none;
+}
+
+.btnSubmit:hover {
+    cursor: pointer;
+}
