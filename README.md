@@ -1,7 +1,7 @@
 # IP Address Tracker App
 
 This is a simple IP Address Tracker App built with [create-react-app](https://create-react-app.dev/), inspired by [Frontend Mentor](https://frontendmentor.io).
-It uses the free [ipify API](https://www.ipify.org/) to request and locate IPv4 or IPv6 addresses and display the located area on the map. The map is provided by the [Leaflet](https://leafletjs.com/) package.
+It uses the free [ipify Geo API](https://geo.ipify.org/) to request and locate IPv4 or IPv6 addresses and display the located area on the map. The map is provided by the [Leaflet](https://leafletjs.com/) package.
 
 
 ## Overview ##
@@ -17,7 +17,7 @@ or
 
 ```yarn install ```
 
-After installation, create a ```.env``` file in the root of your project and add the API key from [ipify](https://www.ipify.org/). It is required in the app to be able to send the request correctly.
+After installation, create a ```.env``` file in the root of your project and add the API key from [ipify](https://geo.ipify.org/). It is required in the app to be able to send the request correctly. The free subscription to ipify Geo API is limited to 1,000 queries per month.
 
 **.env** file
 ```

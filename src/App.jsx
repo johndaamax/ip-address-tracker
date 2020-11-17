@@ -37,15 +37,20 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await (await fetch(`https://geo.ipify.org/api/v1?apiKey=${IPIFY_API_KEY}&ipAddress=${ip}`)).json();
-    if (data.code >= 400) {
-      //Error - submitted wrong IP
-      setError(data.messages);
-      setIsPaneOpen(false);
-    } else {
-      setIPAddrData(data);
-      setIsPaneOpen(true);
-      setError('');
+    try {
+      const data = await (await fetch(`https://geo.ipify.org/api/v1?apiKey=${IPIFY_API_KEY}&ipAddress=${ip}`)).json();
+      if (data.code >= 400) {
+        //Error - submitted wrong IP
+        setError(data.messages);
+        setIsPaneOpen(false);
+      } else {
+        setIPAddrData(data);
+        setIsPaneOpen(true);
+        setError('');
+      }
+    } catch (err) {
+      console.log(err)
+      setError('Request failed. Check your internet connection.')
     }
   }
 
@@ -57,11 +62,11 @@ function App() {
     <div className={styles.wrapper}>
       <div className={styles.heading}>
         <h2 className={styles.header}>IP Tracker App</h2>
-        <div className={styles.inputDiv}>
+        <div className={styles.formContainer}>
           <form onSubmit={handleSubmit}>
             <Input className='ip-search' placeholder='Enter IP to search...' onChange={handleChange} value={ip} />
             {error &&
-              <p className='error'>{error}</p>
+              <span className={styles.error}>{error}</span>
             }
           </form>
         </div>
