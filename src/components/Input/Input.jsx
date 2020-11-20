@@ -2,11 +2,15 @@ import styles from './Input.module.css';
 
 import { ReactComponent as Arrow } from '../../images/icon-arrow.svg'
 
-const Input = ({ type = 'text', placeholder, onChange, value }) => {
+const Input = ({ type = 'text', ariaLabel = 'search', placeholder, changeCallback }) => {
+    const handleChange = (e) => {
+        changeCallback(e.target.value);
+    }
+
     return (
         <div className={styles.wrapper}>
-            <input className={styles.ipInput} type={type} placeholder={placeholder} onChange={onChange} value={value} />
-            <button className={styles.btnSubmit} type='submit'>
+            <input className={styles.ipInput} type={type} aria-label={ariaLabel} placeholder={placeholder} onChange={(e) => handleChange(e)} />
+            <button className={styles.btnSubmit} type='submit' name='submit'>
                 <Arrow />
             </button>
         </div>

@@ -54,8 +54,8 @@ function App() {
     }
   }
 
-  const handleChange = (e) => {
-    setIP(e.target.value);
+  const handleChange = (search) => {
+    setIP(search);
   }
 
   return (
@@ -64,7 +64,7 @@ function App() {
         <h2 className={styles.header}>IP Tracker App</h2>
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit}>
-            <Input className='ip-search' placeholder='Enter IP to search...' onChange={handleChange} value={ip} />
+            <Input className='ip-search' placeholder='Enter IP to search...' changeCallback={handleChange} />
             {error &&
               <span className={styles.error}>{error}</span>
             }
