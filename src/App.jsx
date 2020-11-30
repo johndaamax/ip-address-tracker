@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { useState, useEffect, useReducer } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import L from 'leaflet';
 import icon from './images/marker.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-import Input from './components/Input/Input'
-import DetailsPane from './components/DetailsPane/DetailsPane'
-import CustomDetails from './components/CustomDetails/CustomDetails'
+import SearchForm from './components/SearchForm/SearchForm';
+import DetailsPane from './components/DetailsPane/DetailsPane';
+import CustomDetails from './components/CustomDetails/CustomDetails';
 
-import styles from './App.module.css'
+import { reducer } from './reducer';
+import { fetchIPDetails } from './api/api';
 
-const IPIFY_API_KEY = process.env.REACT_APP_IPIFY_API_KEY;
+import styles from './App.module.css';
 
 // change the default leaflet marker because it is having issues with base64 image path
 let defaultIcon = L.icon({
@@ -22,67 +23,49 @@ let defaultIcon = L.icon({
 L.Marker.prototype.options.icon = defaultIcon;
 
 function App() {
-  const [ip, setIP] = useState('');
-  const [isPaneOpen, setIsPaneOpen] = useState(false);
-  const [ipAddrData, setIPAddrData] = useState(null);
-  const [error, setError] = useState('');
+  const [state, dispatch] = useReducer(reducer, {
+    ip: '',
+    isPaneOpen: false,
+    ipAddrData: null,
+    error: ''
+  });
   const [map, setMap] = useState(null);
 
   useEffect(() => {
     //hook that updates the map's center point based on the IP search coordinates returned from search
-    if (ipAddrData) {
-      map.flyTo([ipAddrData.location.lat, ipAddrData.location.lng]);
+    if (state.ipAddrData) {
+      map.flyTo([state.ipAddrData.location.lat, state.ipAddrData.location.lng]);
     }
-  }, [map, ipAddrData])
+  }, [map, state.ipAddrData])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await (await fetch(`https://geo.ipify.org/api/v1?apiKey=${IPIFY_API_KEY}&ipAddress=${ip}`)).json();
-      if (data.code >= 400) {
-        //Error - submitted wrong IP
-        setError(data.messages);
-        setIsPaneOpen(false);
-      } else {
-        setIPAddrData(data);
-        setIsPaneOpen(true);
-        setError('');
-      }
-    } catch (err) {
-      console.log(err)
-      setError('Request failed. Check your internet connection.')
-    }
+    const results = await fetchIPDetails(state.ip);
+    dispatch({ type: 'SET_FETCH_DATA', payload: results });
   }
 
   const handleChange = (search) => {
-    setIP(search);
+    dispatch({ type: 'UPDATE_IP', payload: search });
   }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
         <h2 className={styles.header}>IP Tracker App</h2>
-        <div className={styles.formContainer}>
-          <form onSubmit={handleSubmit}>
-            <Input className='ip-search' placeholder='Enter IP to search...' changeCallback={handleChange} />
-            {error &&
-              <span className={styles.error}>{error}</span>
-            }
-          </form>
-        </div>
-        {isPaneOpen &&
+        <SearchForm submitCallback={handleSubmit} changeCallback={handleChange} error={state.error} />
+        {state.isPaneOpen &&
           <DetailsPane>
-            <CustomDetails heading='IP Address' value={ipAddrData ? ipAddrData.ip : '-'} />
-            <CustomDetails heading='Location' value={ipAddrData ? `${ipAddrData.location.city}, ${ipAddrData.location.region}, ${ipAddrData.location.country}` : '-'} />
-            <CustomDetails heading='Timezone' value={ipAddrData ? `UTC ${ipAddrData.location.timezone}` : '-'} />
-            <CustomDetails heading='ISP' value={ipAddrData ? ipAddrData.isp : '-'} />
+            <CustomDetails heading='IP Address' value={state.ipAddrData ? state.ipAddrData.ip : '-'} />
+            <CustomDetails heading='Location' value={state.ipAddrData ? `${state.ipAddrData.location.city}, ${state.ipAddrData.location.region}, ${state.ipAddrData.location.country}` : '-'} />
+            <CustomDetails heading='Timezone' value={state.ipAddrData ? `UTC ${state.ipAddrData.location.timezone}` : '-'} />
+            <CustomDetails heading='ISP' value={state.ipAddrData ? state.ipAddrData.isp : '-'} />
           </DetailsPane>
         }
       </div>
       <div>
         <MapContainer
           center={[50.85045, 4.34878]}
-          zoom={12}
+          zoom={13}
           scrollWheelZoom={true}
           whenCreated={setMap}
         >
@@ -90,7 +73,7 @@ function App() {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[ipAddrData?.location.lat || 50.85045, ipAddrData?.location.lng || 4.34878]}>
+          <Marker position={[state.ipAddrData?.location.lat || 50.85045, state.ipAddrData?.location.lng || 4.34878]}>
             <Popup>
             </Popup>
           </Marker>

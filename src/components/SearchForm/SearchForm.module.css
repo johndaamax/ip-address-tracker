@@ -1,3 +1,14 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    padding: 0.5rem 0;
+}
+
 .wrapper {
     display: flex;
     flex-flow: row nowrap;
@@ -30,4 +41,12 @@
 
 .btnSubmit:hover {
     cursor: pointer;
+}
+
+.error{
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: rgb(255, 48, 48);
+    font-size: 18px;
+    max-width: 300px;
 }

@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
 import App from './App';
 
-test('verifies input render', () => {
-  // render(<App />);
-  // const inputElement = screen.getByLabelText('search');
-  // const button = screen.getByRole('button', { name: 'submit' });
-  // expect(inputElement).toBeInTheDocument();
-  // expect(button).toBeInTheDocument();
+test('verifies error and details pane elements are not present on load', () => {
+  const { queryByTestId } = render(<App />);
+
+  expect(queryByTestId('search-error')).not.toBeInTheDocument();
+  expect(queryByTestId('details-pane-div')).not.toBeInTheDocument();
 });

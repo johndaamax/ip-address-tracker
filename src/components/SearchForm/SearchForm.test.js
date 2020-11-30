@@ -1,9 +1,11 @@
-import { render, fireEvent } from '@testing-library/react';
-import Input from './Input';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import SearchForm from './SearchForm';
 
 const setup = () => {
     const handleChange = jest.fn();
-    const utils = render(<Input placeholder='Enter IP' changeCallback={handleChange} />);
+    const utils = render(<SearchForm changeCallback={handleChange} />);
     const input = utils.getByLabelText('search');
     const button = utils.getByRole('button');
     return {
@@ -22,7 +24,7 @@ test('verifies input render', () => {
 
 test('calls changeCallback prop when typed', () => {
     const { input, handleChange } = setup();
-    fireEvent.change(input, { target: { value: '100' } });
-    expect(handleChange).toHaveBeenCalledTimes(1);
+    userEvent.type(input, '100');
     expect(handleChange).toHaveBeenCalledWith('100');
+    expect(input).toHaveValue('100');
 })

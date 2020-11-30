@@ -14,34 +14,16 @@
     color: white;
     padding: 1rem;
     height: 30vh;
-    min-height: 140px;
+    min-height: 220px;
 }
 
 .header {
     margin-bottom: 0.5rem;
 }
 
-.formContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-form {
-    padding: 0.5rem 0;
-}
-
-.error{
-    display: inline-block;
-    margin-top: 0.4rem;
-    color: rgb(255, 48, 48);
-    font-size: 18px;
-    max-width: 300px;
-}
-
 @media screen and (max-width: 768px) {
     .heading {
         height: 45vh;
+        min-height: 285px;
     }
 }
