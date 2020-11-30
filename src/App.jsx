@@ -31,6 +31,11 @@ function App() {
   });
   const [map, setMap] = useState(null);
 
+  //load 
+  useEffect(() => {
+    fetchAndSaveIPData('');
+  }, [])
+
   useEffect(() => {
     //hook that updates the map's center point based on the IP search coordinates returned from search
     if (state.ipAddrData) {
@@ -38,10 +43,14 @@ function App() {
     }
   }, [map, state.ipAddrData])
 
+  const fetchAndSaveIPData = async (ip) => {
+    const results = await fetchIPDetails(ip);
+    dispatch({ type: 'SET_FETCH_DATA', payload: results });
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const results = await fetchIPDetails(state.ip);
-    dispatch({ type: 'SET_FETCH_DATA', payload: results });
+    fetchAndSaveIPData(state.ip);
   }
 
   const handleChange = (search) => {
@@ -64,7 +73,7 @@ function App() {
       </div>
       <div>
         <MapContainer
-          center={[50.85045, 4.34878]}
+          center={[50.8504, 4.3487]}
           zoom={13}
           scrollWheelZoom={true}
           whenCreated={setMap}
@@ -73,7 +82,7 @@ function App() {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[state.ipAddrData?.location.lat || 50.85045, state.ipAddrData?.location.lng || 4.34878]}>
+          <Marker position={[state.ipAddrData?.location.lat || 50.8504, state.ipAddrData?.location.lng || 4.3487]}>
             <Popup>
             </Popup>
           </Marker>

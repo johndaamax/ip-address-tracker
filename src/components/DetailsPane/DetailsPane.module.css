@@ -8,11 +8,9 @@
     border-radius: 15px;
     z-index: 1000; /* leaflet has z-index of 400, in order to be in front of it we need a value > 400 */
     transform: translateY(-50%);
-    transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 @media screen and (min-width: 768px) {
-
     .wrapper {
         padding: 1.5rem 1rem;
     }
@@ -26,13 +24,6 @@
     }
 }
 
-
-@media screen and (max-width: 446px) {
-    .wrapper {
-        width: 85%;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .wrapper {
         padding: 1rem;
@@ -41,5 +32,11 @@
         align-items: center;
         width: 60%;
         min-width: 280px;
+    }
+}
+
+@media screen and (max-width: 446px) {
+    .wrapper {
+        width: 85%;
     }
 }
