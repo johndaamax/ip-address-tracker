@@ -8,7 +8,7 @@ export const reducer = (state, action) => {
         case 'UPDATE_IP':
             return {
                 ...state,
-                ip: action.payload
+                input: action.payload
             }
         default:
             return state;

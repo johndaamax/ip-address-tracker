@@ -1,8 +1,8 @@
 const IPIFY_API_KEY = process.env.REACT_APP_IPIFY_API_KEY;
 
-export const fetchIPDetails = async (ip) => {
+export const fetchIPDetails = async (input) => {
     try {
-        const data = await (await fetch(`https://geo.ipify.org/api/v1?apiKey=${IPIFY_API_KEY}&ipAddress=${ip}`)).json();
+        const data = await (await fetch(`https://geo.ipify.org/api/v1?apiKey=${IPIFY_API_KEY}&ipAddress=${input}&domain=${input}`)).json();
         if (data.code >= 400) {
             //Error - submitted wrong IP
             return {

@@ -3,33 +3,37 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 310px;
 }
 
 form {
     padding: 0.5rem 0;
+    width: 100%;
 }
 
 .wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    width: 100%;
 }
 
-.ipInput {
-    padding: 1rem 0.5rem;
-    font-size: 20px;
+input {
+    padding: 1rem;
+    font-size: 18px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border: none;
+    width: 100%;
 }
 
-.ipInput:focus {
+input:focus {
     outline: none;
 }
 
 .btnSubmit {
     background: black;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     border: none;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -49,4 +53,21 @@ form {
     color: rgb(255, 48, 48);
     font-size: 18px;
     max-width: 300px;
+}
+
+
+/* keep the input width at 360px minimum on larger resolutions */
+@media screen and (min-width: 768px) {
+    .formContainer {
+        width: 550px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    input, .error {
+        font-size: 80%;
+    }
+    input {
+        padding: 1rem 0.8rem;
+    }
 }

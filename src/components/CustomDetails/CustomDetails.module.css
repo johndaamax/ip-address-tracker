@@ -12,25 +12,16 @@ h3, h6{
 
 h3 {
     word-wrap: break-word;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 h6 {
-    font-weight: 400;
+    font-weight: 700;
     color: grey;
     text-transform: uppercase;
     letter-spacing: 0.3mm;
     margin-bottom: 0.4rem;
-}
-
-
-@media screen and (max-width: 446px) {
-    /* .wrapper {
-      margin-bottom: 1rem;
-      padding: 0;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    } */
 }
 
 @media screen and (max-width: 768px) {

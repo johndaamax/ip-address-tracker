@@ -14,11 +14,11 @@
     color: white;
     padding: 1rem;
     height: 30vh;
-    min-height: 220px;
+    min-height: 215px;
 }
 
 .header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 768px) {

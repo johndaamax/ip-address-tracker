@@ -24,7 +24,7 @@ L.Marker.prototype.options.icon = defaultIcon;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
-    ip: '',
+    input: '',
     isPaneOpen: false,
     ipAddrData: null,
     error: ''
@@ -43,14 +43,14 @@ function App() {
     }
   }, [map, state.ipAddrData])
 
-  const fetchAndSaveIPData = async (ip) => {
-    const results = await fetchIPDetails(ip);
+  const fetchAndSaveIPData = async (input) => {
+    const results = await fetchIPDetails(input);
     dispatch({ type: 'SET_FETCH_DATA', payload: results });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchAndSaveIPData(state.ip);
+    fetchAndSaveIPData(state.input);
   }
 
   const handleChange = (search) => {
