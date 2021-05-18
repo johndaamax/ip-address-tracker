@@ -19,7 +19,7 @@ export const fetchIPDetails = async (input) => {
     } catch (err) {
         console.error(err);
         return {
-            error: err.message
+            error: `${err.message}. Please check your connection or disable your adblocker.`
         }
     }
 }
