@@ -52,7 +52,6 @@ input:focus {
     margin-top: 0.4rem;
     color: rgb(255, 48, 48);
     font-size: 18px;
-    max-width: 300px;
 }
 
 
@@ -65,7 +64,7 @@ input:focus {
 
 @media screen and (max-width: 768px) {
     input, .error {
-        font-size: 80%;
+        font-size: 85%;
     }
     input {
         padding: 1rem 0.8rem;
